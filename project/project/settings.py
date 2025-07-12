@@ -45,7 +45,12 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'authentication',
 
+    'allauth',
+    'allauth.account',
+
 ]
+
+AUTH_USER_MODEL = 'authentication.CustomUser'
 # django tailwind
 TAILWIND_APP_NAME = 'theme'
 
@@ -58,6 +63,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    # the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
+
+]
+
+AUTH_USER_MODEL = 'authentication.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -72,6 +89,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                 # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -135,3 +155,6 @@ STATIC_ROOT = 'Django-Boilerplate/project/static'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home/'
+LOGOUT_REDIRECT_URL = 'login/'
