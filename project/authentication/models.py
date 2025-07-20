@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
@@ -27,10 +27,10 @@ class CustomUserManager(BaseUserManager):
 
 
     def get_by_natural_key(self, email: str):
-        return super().get_by_natural_key('email')
+        return super().get_by_natural_key(email)
     
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=255, blank=True)
 
@@ -40,8 +40,12 @@ class CustomUser(AbstractBaseUser):
     date_joined = models.DateTimeField(auto_now_add=True)
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [] # Add other required fields if any, besides the USERNAME_FIELD
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'

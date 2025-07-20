@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% load account %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<h1>Hii {% user_display user %}</h1>
 <h1 class='bg-pink-500'>Welcome to Home Page.</h1>
+<div><a href="{% url "account_logout" %}">Logout</a></div>
+<h2>hell</h2>
+<h4>hell</h4>
+<h5>hell</h5>
 
 {% endblock %}
