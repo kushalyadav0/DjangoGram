@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+</head>
+<body>
+    <h1>let's chat!!</h1>
+
+    <script type='text/javascript'>
+        let url = `ws://${window.location.host}/ws/socket-server/`
+
+        const chatSocket  = new WebSocket(url) // chatSocket object
+
+        //message event to listen to the messages from the server
+        console.log(chatSocket.url); // 'ws://websocket.example.org'
+
+        // Do something with socket
+        chatSocket.send(hello)
+
+        //chatSocket.close();
+    </script>
+</body>
+</html>

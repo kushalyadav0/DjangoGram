@@ -35,6 +35,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    "daphne",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'chat',
+
     'tailwind',
     'theme',
     'django_browser_reload',
@@ -53,6 +58,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
 ]
+
+ASGI_APPLICATION = 'project.asgi.application'
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
 # django tailwind
