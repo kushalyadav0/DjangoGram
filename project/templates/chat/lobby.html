@@ -1,25 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lobby</title>
-</head>
-<body>
-    <h1>let's chat!!</h1>
+  {% load static %}
+  {% load tailwind_tags %}
 
-    <script type='text/javascript'>
-        let url = `ws://${window.location.host}/ws/socket-server/`
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Lobby</title>
 
-        const chatSocket  = new WebSocket(url) // chatSocket object
+      {% tailwind_css %}
+  </head>
+  <body>
+      <h1 id='heading ' onclick='this.innerHTML= "hET"'class="text-4xl font-extrabold dark:text-pink-600 flex items-center justify-center h-24">let's chat!!</h1>
+      <form action="" method="post">
+      <label for="room_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">enter lobby name</label>
 
-        //message event to listen to the messages from the server
-        console.log(chatSocket.url); // 'ws://websocket.example.org'
+      <input type="text" id='lobby_name'class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2.5" placeholder="lobby1" required  name="room_name">
+      
+      <div class="flex justify-center">
+    <button type="button" id="submit_lobby_name" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 flex items-center justify-center">
+      Submit
+    </button>
+  </div>
 
-        // Do something with socket
-        chatSocket.send(hello)
-
-        //chatSocket.close();
-    </script>
-</body>
-</html>
+  </form>
+      
+      <script type='text/javascript' src='{% static "chat/lobby_script.js" %}'>
+          
+      </script>
+  </body>
+  </html>

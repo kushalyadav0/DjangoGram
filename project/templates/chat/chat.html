@@ -1,0 +1,25 @@
+{% load static %}
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+</head>
+<body>
+    <div id="msg_div" class="bg-pink w-54 h-54 border-2">
+       
+    </div>
+    <section>
+        <form action="" id="form">
+            <input type="text" name="message" class="mt-8 mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+        </form>
+    
+    </section>
+
+    <script src='{% static "chat/chat_script.js" %}'></script>
+</body>
+</html>

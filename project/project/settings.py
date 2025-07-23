@@ -65,6 +65,14 @@ AUTH_USER_MODEL = 'authentication.CustomUser'
 # django tailwind
 TAILWIND_APP_NAME = 'theme'
 
+# channel layer
+# should use redis, we will be using InMemoryChannelLayer
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
