@@ -1,25 +1,37 @@
 {% load static %}
 {% load tailwind_tags %}
+{% load account %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat Room</title>
     {% tailwind_css %}
 </head>
-<body>
-    <div id="msg_div" class="bg-pink w-54 h-54 border-2">
-       
-    </div>
-    <section>
-        <form action="" id="form">
-            <input type="text" name="message" class="mt-8 mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+<body class="bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 min-h-screen flex flex-col items-center justify-center">
+    <div class="w-full max-w-xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-8">
+        <div class="flex flex-col items-center mb-8">
+            <span class="text-lg font-medium text-gray-200">Hi,</span>
+            <span class="text-3xl font-extrabold text-pink-600 dark:text-pink-400 mt-2">{% user_display user %}</span>
+            <span class="text-lg font-medium text-gray-200 mt-2">Welcome to the</span>
+            <span class="text-3xl font-extrabold text-pink-600 dark:text-pink-400 mt-2">Chat Hell 😈</span>
+        </div>
+        <div id="msg_div" class="h-80 overflow-y-auto bg-gray-900/80 rounded-lg border border-pink-600 shadow-inner p-4 mb-6 flex flex-col gap-2">
+            <!-- Messages will appear here -->
+        </div>
+        <form action="" id="form" class="flex gap-2">
+            <input type="text" name="message" placeholder="Type your message..." autocomplete="off"
+                class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100 transition duration-150" />
+            <button type="submit"
+                class="px-6 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition duration-150 shadow">
+                Send
+            </button>
         </form>
-    
-    </section>
+    </div>
 
+    <span id="room-name" hidden>{{ room_name|json_script:"room-name" }}</span>
     <script src='{% static "chat/chat_script.js" %}'></script>
 </body>
 </html>

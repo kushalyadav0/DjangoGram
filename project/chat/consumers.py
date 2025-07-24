@@ -4,7 +4,7 @@ from asgiref.sync import async_to_sync
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self): # for initial request that comes from the client
-        self.room_name = 'test'
+        self.room_name = self.scope['url_route']['kwargs']['room_name'] # Get room_name from the URL
         
         async_to_sync(self.channel_layer.group_add)(
             self.room_name,
