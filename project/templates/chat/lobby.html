@@ -10,20 +10,19 @@
     {% tailwind_css %}
 </head>
 
-<body>\
-  <script type='text/javascript' src='{% static "chat/lobby_script.js" %}'></script>
+<body>
 
-  <h1 id='heading ' onclick='this.innerHTML= "hET"'class="text-4xl font-extrabold dark:text-pink-600 flex items-center justify-center h-24">let's chat!!</h1>
+  <h1 id="heading" onclick="this.innerHTML= 'hET'" class="text-4xl font-extrabold dark:text-pink-600 flex items-center justify-center h-24">let's chat!!</h1>
 
   <form action="" method="post">
-    {% csrf_token %}
+   
     
-    <label for="room_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Enter lobby name:</label>
+    <label for="room_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Enter room name:</label>
     <input type="text" id="room_name"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2.5" placeholder="your room" required  name="room_name">
 
     <div class="flex justify-center">
 
-      <button type="button" id="submit_lobby_name" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 flex items-center justify-center">
+      <button type="button" id='submit_lobby_name' class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 flex items-center justify-center">
       Submit
       </button>
 
@@ -31,6 +30,7 @@
 
   </form>
 
+  <script type='text/javascript' src='{% static "chat/lobby_script.js" %}'></script>
 
   </body>
   </html>

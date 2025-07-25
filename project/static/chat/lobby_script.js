@@ -1,13 +1,21 @@
 let btn = document.querySelector('#submit_lobby_name');
+let roomInput = document.querySelector('#room_name');  // reference to the input element
 
 btn.addEventListener('click', () => {
-    let lobbyName = document.querySelector('#room_name').value.trim(); // fixed this line
-    console.log(lobbyName);
+    let roomName = roomInput.value.trim();  // now we get the value when needed
+    console.log(roomName);
 
-    if (!lobbyName) {
-        alert("Please enter a lobby name!");
+    if (!roomName) {
+        alert("Please enter a room name!");
         return;
     }
 
-    window.location.href = `/chat/${lobbyName}/`;
+    window.location.href = `/chat/${roomName}/`;
+});
+
+roomInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        btn.click();
+    }
 });
