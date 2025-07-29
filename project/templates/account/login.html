@@ -4,7 +4,58 @@
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
+
 {% block content %}
+<style>
+    body {
+        background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .login-container {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        max-width: 400px;
+        margin: 48px auto;
+        padding: 32px 28px;
+    }
+    h1 {
+        color: #2d3a4b;
+        text-align: center;
+        margin-bottom: 24px;
+        font-weight: 600;
+    }
+    p {
+        color: #4a5a6a;
+        text-align: center;
+    }
+    form {
+        margin-top: 24px;
+    }
+    button, [type="submit"] {
+        background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 0;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 12px;
+    }
+    button:hover, [type="submit"]:hover {
+        background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+    }
+    hr {
+        border: none;
+        border-top: 1px solid #e0eafc;
+        margin: 32px 0;
+    }
+</style>
+<div class="login-container">
     {% element h1 %}
         {% trans "Sign In" %}
     {% endelement %}
@@ -52,7 +103,9 @@
     {% if SOCIALACCOUNT_ENABLED %}
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %}
+</div>
 {% endblock content %}
+
 {% block extra_body %}
     {{ block.super }}
     {% if PASSKEY_LOGIN_ENABLED %}

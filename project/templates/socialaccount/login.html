@@ -4,7 +4,51 @@
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
+{% block extra_head %}
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .login-container {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 2.5rem 2rem 2rem 2rem;
+        }
+        .login-container h1 {
+            color: #4f46e5;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .login-container p {
+            color: #64748b;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .login-container button[type="submit"] {
+            background: linear-gradient(90deg, #6366f1 0%, #818cf8 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .login-container button[type="submit"]:hover {
+            background: linear-gradient(90deg, #4338ca 0%, #6366f1 100%);
+        }
+    </style>
+{% endblock extra_head %}
 {% block content %}
+    <div class="login-container">
     {% if process == "connect" %}
         {% element h1 %}
             {% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}
@@ -28,4 +72,5 @@
             {% endelement %}
         {% endslot %}
     {% endelement %}
+    </div>
 {% endblock content %}
