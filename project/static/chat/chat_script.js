@@ -6,8 +6,8 @@ let url = `${protocol}://${window.location.host}/ws/socket-server/${roomName}/`;
 const chatSocket = new WebSocket(url); // chatSocket object
 console.log(chatSocket);
 
-//test connection
-function checkConnection(){
+//To test websocket connection
+function checkWebsocketConnection(){
     if (chatSocket.readyState === WebSocket.OPEN) {
         console.log('WebSocket is open');
     } else if (chatSocket.readyState === WebSocket.CONNECTING) {
@@ -18,7 +18,13 @@ function checkConnection(){
         console.log('WebSocket is closed');
     }
 };
-checkConnection();
+checkWebsocketConnection();
+
+
+chatSocket.onopen = function() {
+    console.log("✅ WebSocket connected");
+};
+
 
 let form = document.querySelector('#form');
 form.addEventListener('submit', (e) => {
@@ -37,18 +43,36 @@ form.addEventListener('submit', (e) => {
 
 // Listen for messages from WebSocket
 chatSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
+    try {    
+        const data = JSON.parse(e.data);
+        checkWebsocketConnection();
 
-    if(data.type === 'chat') {
-    const msgDiv = document.querySelector('#msg_div');
-    
-    // Create a new element for each message
-    const messageElement = document.createElement('div');
-    messageElement.textContent = data.message;
-    msgDiv.appendChild(messageElement);
+        //to check weather data is coming in frontend or not
+        console.log('Recived data before type check:', data);
+        checkWebsocketConnection();
 
-    // scroll down for every new message
-    scrollToBottom()
+        if(data.type === 'chat_message') {
+        const msgDiv = document.querySelector('#msg_div');
+        
+        // Create a new element for each message
+        const messageElement = document.createElement('div');
+        
+        messageElement.textContent = data.message;
+        msgDiv.appendChild(messageElement);
+
+        // comparing current user with sender
+        const currentUser = document.getElementById('current-username').textContent;
+        if (data.sender === currentUser) {
+            messageElement.classList.add('bubble', 'me');
+        } else {
+            messageElement.classList.add('bubble', 'other');
+        }
+
+        // scroll down for every new message
+        scrollToBottom()
+        }
+    } catch (err){
+        console.error("❌ Error parsing message:", err, e.data);
     }
 };  
 

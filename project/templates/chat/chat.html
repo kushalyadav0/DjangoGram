@@ -5,34 +5,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Room</title>
-    {% tailwind_css %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Room</title>
+  {% tailwind_css %}
+  <style>
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #fbc2eb 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+    .chat-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: rgba(250, 250, 250, 0.8);
+    }
+    .bubble {
+      max-width: 75%;
+      padding: 0.6rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .bubble.me {
+      align-self: flex-end;
+      background: #f472b6; /* pink */
+      color: white;
+      border-bottom-right-radius: 0.3rem;
+    }
+    .bubble.other {
+      align-self: flex-start;
+      background: #e5e7eb; /* light gray */
+      color: #111827;
+      border-bottom-left-radius: 0.3rem;
+    }
+    .chat-footer {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: white;
+      border-top: 1px solid #fbc2eb;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 min-h-screen flex flex-col items-center justify-center">
+<body>
 
-    <main class="w-full max-w-xl mx-4 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-8">
-        <div class="flex flex-col items-center mb-8">
-            <span class="text-lg font-medium text-gray-200">Hi,</span>
-            <span class="text-3xl font-extrabold text-pink-600 dark:text-pink-400 mt-2">{% user_display user %}</span>
-            <span class="text-lg font-medium text-gray-200 mt-2">Welcome to the</span>
-            <span class="text-3xl font-extrabold text-pink-600 dark:text-pink-400 mt-2">Chat Hell 😈</span>
-        </div>
-        <div id="msg_div" class="h-80 text-amber-100 overflow-y-auto bg-gray-900/80 rounded-lg border border-pink-600 shadow-inner p-4 mb-6 flex flex-col gap-2">
-            <!-- Messages will appear here -->
-        </div>
-        <form action="" id="form" class="flex gap-2">
-            <input type="text" name="message" placeholder="Type your message..." autocomplete="off"
-                class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100 transition duration-150" />
-            <button type="submit"
-                class="px-6 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition duration-150 shadow">
-                Send
-            </button>
-        </form>
-    </main>
+  <main class="chat-card">
+    <!-- Header -->
+    <header class="p-4 border-b border-pink-200 bg-white/80 text-center">
+      <h1 class="text-xl font-bold text-pink-600">Chat Hell 😈</h1>
+      <p class="text-sm text-gray-600">Hi, <span class="font-semibold">{% user_display user %}</span></p>
+    </header>
 
-    <span id="room-name" hidden>{{ room_name|json_script:"room-name" }}</span>
-    <script src='{% static "chat/chat_script.js" %}'></script>
+    <!-- Messages Section -->
+    <div id="msg_div" class="messages">
+      <!-- Example Messages -->
+      <div class="bubble other">Hey! Welcome to the room 🎉</div>
+      <div class="bubble me">Hi there 😎</div>
+    </div>
+
+    <!-- Input Form -->
+    <form action="" id="form" class="chat-footer">
+      <input 
+        type="text" 
+        name="message" 
+        placeholder="Type your message..." 
+        autocomplete="off"
+        class="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-pink-400 focus:border-pink-400 bg-gray-50 text-gray-900 transition duration-150"
+      />
+      <button 
+        type="submit"
+        class="px-5 py-2 rounded-full bg-pink-600 text-white font-medium hover:bg-pink-700 transition duration-150 shadow">
+        ➤
+      </button>
+    </form>
+  </main>
+  <!--to figure out eiter the message is sent by the user itself or annyi=one else in the room-->
+  <span id="current-username" hidden>{{ user.username }}</span>
+  <span id="room-name" hidden>{{ room_name|json_script:"room-name" }}</span>
+  <script type="application/json" id="room-name"></script>
+  <script src='{% static "chat/chat_script.js" %}'></script>
 </body>
 </html>

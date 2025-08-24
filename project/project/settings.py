@@ -29,8 +29,14 @@ SECRET_KEY = 'django-insecure-3z@og%%p_=*(64ml$ckse3!g0x(b14--!%7nlo08x-!y3cy7hb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost',
+                '127.0.0.1',
+                'https://pkqbj1g6-8000.inc1.devtunnels.ms']
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = [
+    "https://pkqbj1g6-8000.inc1.devtunnels.ms"
+]
 
 # Application definition
 
