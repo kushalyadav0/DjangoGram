@@ -74,14 +74,14 @@
   <main class="chat-card">
     <!-- Header -->
     <header class="p-4 border-b border-pink-200 bg-white/80 text-center">
-      <h1 class="text-xl font-bold text-pink-600">Chat Hell 😈</h1>
+      <h1 class="text-xl font-bold text-pink-600">Chat in {{room_name}}</h1>
       <p class="text-sm text-gray-600">Hi, <span class="font-semibold">{% user_display user %}</span></p>
     </header>
 
     <!-- Messages Section -->
     <div id="msg_div" class="messages">
       <!-- Example Messages -->
-      <div class="bubble other">Hey! Welcome to the room 🎉</div>
+      <div class="bubble other">Hey! Welcome to the {{room_name}} 🎉</div>
       <div class="bubble me">Hi there 😎</div>
     </div>
 
